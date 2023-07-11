@@ -10,30 +10,28 @@ import SeleniumProject.AbstractComponents.AbstractComponents;
 
 public class CartPage extends AbstractComponents {
 	WebDriver driver;
-	
+
 	public CartPage(WebDriver driver) {
-		//initialization
+		// initialization
 		super(driver);
 		this.driver = driver;
-		//helps to initializiaze the driver object for Page Factory(arg driver and this constructor)
+		// helps to initializiaze the driver object for Page Factory(arg driver and this
+		// constructor)
 		PageFactory.initElements(driver, this);
 	}
 
-	//WebElement username = driver.findElement(By.id("userEmail"));
+	// WebElement username = driver.findElement(By.id("userEmail"));
 
-	
-	@FindBy(xpath ="//*[@routerlink='/dashboard/cart']")
+	@FindBy(xpath = "//*[@routerlink='/dashboard/cart']")
 	WebElement cartbutton;
-	
+
 	@FindBy(xpath = "//*[@class='cart']//h3")
 	private List<WebElement> cartproduct;
-	
-	
+
 	public Boolean verifyProductDisplay(String productname) {
-		Boolean match = cartproduct.stream().anyMatch(cart->cart.getText().equals(productname));
-		//driver.findElement(By.cssSelector(".totalRow button")).click();
+		Boolean match = cartproduct.stream().anyMatch(cart -> cart.getText().equals(productname));
+		// driver.findElement(By.cssSelector(".totalRow button")).click();
 		return match;
 	}
-	
 
 }

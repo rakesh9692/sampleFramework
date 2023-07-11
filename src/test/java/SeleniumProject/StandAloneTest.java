@@ -15,11 +15,12 @@ import java.util.HashMap;
 
 public class StandAloneTest extends BaseTest {
 	String productname;
-	@Test (dataProvider ="getData" )
-	public void submitOrder(HashMap<String,String> input) throws IOException, InterruptedException {
 
-		//add comments
-		
+	@Test(dataProvider = "getData")
+	public void submitOrder(HashMap<String, String> input) throws IOException, InterruptedException {
+
+		// add comments
+
 		ProductCatalogue productcatalog = landingpage.loginApplication(input.get("email"), input.get("password"));
 		List<WebElement> products = productcatalog.getProductList();
 		productcatalog.addProductToCart(input.get("productname"));
@@ -33,23 +34,24 @@ public class StandAloneTest extends BaseTest {
 		checkout.checkoutclick();
 		checkout.fillCardDetails(input.get("productname"), "India");
 		confirmationPage confirm = checkout.submitOrder();
-		//change to soft assert
+		// change to soft assert
 		String confirmmessage = confirm.getConfirmationMessage();
 		Assert.assertTrue(confirmmessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 
 	}
-	
-	@Test(dependsOnMethods={"submitOrder"})
+
+	@Test(dependsOnMethods = { "submitOrder" })
 	public void OrderPageValidation() {
-		//verify order is displayed
+		// verify order is displayed
 		ProductCatalogue productcatalog = landingpage.loginApplication("rakesh9692@gmail.com", "Rakesh123");
 		OrderPage orderpage = productcatalog.goToOrderPage();
-		Assert.assertTrue(orderpage.verifyProductDisplay(productname));		
+		Assert.assertTrue(orderpage.verifyProductDisplay(productname));
+
 	}
-	
+
 	@DataProvider
 	public Object[][] getData() throws IOException {
-		
+
 //		HashMap<String,String> map = new HashMap<String,String>();
 //		map.put("email", "rakesh9692@gmail.com");
 //		map.put("password", "Rakesh123");
@@ -59,20 +61,18 @@ public class StandAloneTest extends BaseTest {
 //		map1.put("email", "ram0101@gmail.com");
 //		map1.put("password", "Rakesh123");
 //		map1.put("productname", "ADIDAS ORIGINAL");
-		
-		List<HashMap<String,String>> data = getJsonToMap(System.getProperty("user.dir")+"\\src\\main\\java\\SeleniumProject\\data\\userdetails.json");
-		return new Object[][] { {data.get(0)}, {data.get(1)} };
-		
-		
-		
+
+		List<HashMap<String, String>> data = getJsonToMap(
+				System.getProperty("user.dir") + "\\src\\main\\java\\SeleniumProject\\data\\userdetails.json");
+		return new Object[][] { { data.get(0) }, { data.get(1) } };
+
 	}
-	                       
+
 //	@DataProvider
 //	public Object[][] getData() {
 //		
 //		
 //		return new Object[][] { {"rakesh9692@gmail.com","Rakesh123","ZARA 3"}, {map1} };
 //	}
-
 
 }

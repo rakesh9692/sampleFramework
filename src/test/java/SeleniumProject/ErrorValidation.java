@@ -9,13 +9,12 @@ import SeleniumProject.AbstractComponents.*;
 import SeleniumProject.TestComponents.BaseTest;
 
 public class ErrorValidation extends BaseTest {
-	
+
 	String productname = "ZARA COAT 3";
 
 	@Test
 	public void LoginErrorValidation() throws IOException, InterruptedException {
 
-		
 		landingpage.loginApplication("rakesh9691@gmail.com", "Rakesh123");
 		Assert.assertEquals("Incorrect  or password.", landingpage.getErrorLogin());
 

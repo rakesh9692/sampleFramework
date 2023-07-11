@@ -9,8 +9,8 @@ import SeleniumProject.AbstractComponents.AbstractComponents;
 public class confirmationPage extends AbstractComponents {
 
 	WebDriver driver;
-	
-	@FindBy(css= ".hero-primary")
+
+	@FindBy(css = ".hero-primary")
 	WebElement confirmText;
 
 	public confirmationPage(WebDriver driver) {
@@ -21,10 +21,10 @@ public class confirmationPage extends AbstractComponents {
 		// constructor)
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public String getConfirmationMessage() {
 		return confirmText.getText();
-		
+
 	}
 
 }

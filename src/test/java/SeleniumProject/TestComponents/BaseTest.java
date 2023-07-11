@@ -69,28 +69,29 @@ public class BaseTest {
 		driver.close();
 
 	}
-	
+
 	public List<HashMap<String, String>> getJsonToMap(String filepath) throws IOException {
-		
-		//read json to string
-		String jsonContent = FileUtils.readFileToString(new File(filepath),StandardCharsets.UTF_8);
-		
-		//String to HashMap - JacksonDatabing (used to convert string to hashmap)
-		
+
+		// read json to string
+		String jsonContent = FileUtils.readFileToString(new File(filepath), StandardCharsets.UTF_8);
+
+		// String to HashMap - JacksonDatabing (used to convert string to hashmap)
+
 		ObjectMapper mapper = new ObjectMapper();
-		List<HashMap<String,String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String,String>>>(){});
+		List<HashMap<String, String>> data = mapper.readValue(jsonContent,
+				new TypeReference<List<HashMap<String, String>>>() {
+				});
 		return data;
 	}
-	
-	public String getScreenshot(String testcasename,WebDriver driver) throws IOException {
-		
-		TakesScreenshot ts = (TakesScreenshot)driver;
+
+	public String getScreenshot(String testcasename, WebDriver driver) throws IOException {
+
+		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
-		File file = new File(System.getProperty("user.dir")+"\\reports\\"+testcasename+".png");
+		File file = new File(System.getProperty("user.dir") + "\\reports\\" + testcasename + ".png");
 		FileUtils.copyFile(source, file);
-		return System.getProperty("user.dir")+"\\reports\\"+testcasename+".png";
-		
-		
+		return System.getProperty("user.dir") + "\\reports\\" + testcasename + ".png";
+
 	}
 
 }

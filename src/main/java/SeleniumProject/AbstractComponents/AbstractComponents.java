@@ -13,44 +13,44 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import SeleniumProject.pageobject.CartPage;
 
 public class AbstractComponents {
-	
+
 	WebDriver driver;
+
 	public AbstractComponents(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(xpath = "//*[@routerlink='/dashboard/cart']")
 	WebElement cartbutton;
-	
+
 	@FindBy(xpath = "//*[@routerlink='/dashboard/myorders']")
 	WebElement orderbutton;
 
 	public void waitForElementToAppear(By findBy) {
-		WebDriverWait wait  = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
 	}
-	
+
 	public void waitForElementToAppearElement(WebElement findBy) {
-		WebDriverWait wait  = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(findBy));
 	}
-	
-	
+
 	public CartPage geToCartPage() {
 		cartbutton.click();
 		CartPage cartpage = new CartPage(driver);
 		return cartpage;
 	}
-	
+
 	public OrderPage goToOrderPage() {
 		orderbutton.click();
 		OrderPage orderPage = new OrderPage(driver);
 		return orderPage;
 	}
-	
+
 	public void waitForElementToDisappear(WebElement findBy) {
-		WebDriverWait wait  = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.invisibilityOf(findBy));
 	}
 
